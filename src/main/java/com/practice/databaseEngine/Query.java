@@ -47,7 +47,11 @@ public class Query {
 
 	public void setSource(ArrayList<String> data) {
 		int fromIndex = data.indexOf("from");
-		source =  data.get(fromIndex+1);
+		if(fromIndex != -1)
+		{
+			source =  data.get(fromIndex+1);
+		}
+		
 	}
 
 	public ArrayList<String> getBasePart() {
@@ -56,10 +60,18 @@ public class Query {
 
 	public void setBasePart(ArrayList<String> data) {
 		int whereIndex = data.indexOf("where");
-		for(int i=0 ; i < whereIndex ; i++) {
-			basePart.add(data.get(i));
+		if(whereIndex != -1)
+		{
+			for(int i=0 ; i < whereIndex ; i++) {
+				basePart.add(data.get(i));
+			}
 		}
-		
+		else
+		{
+			for(int i=0 ; i < data.size() ; i++) {
+				basePart.add(data.get(i));
+			}
+		}
 	}
 
 	public ArrayList<String> getFilterPart() {
@@ -68,10 +80,12 @@ public class Query {
 
 	public void setFilterPart(ArrayList<String> data) {
 		int whereIndex = data.indexOf("where");
-		for(int i=whereIndex+1 ; i < data.size() ; i++) {
-			filterPart.add(data.get(i));
+		if(whereIndex != -1)
+		{
+			for(int i=whereIndex+1 ; i < data.size() ; i++) {
+				filterPart.add(data.get(i));
+			}
 		}
-		
 	}
 
 	public ArrayList<ArrayList<String>> getConditions() {
@@ -79,37 +93,40 @@ public class Query {
 	}
 
 	public void setConditions(ArrayList<String> data) {
-		int count = 0;
-		int start = 0;
-		int end = logicalOpIndex.get(count);
-		
-		//System.out.println(logicalOpIndex);
-		//System.out.println(end);
-		//System.out.println(logicalOpIndex.size());
-		for(int i = 0; i < logicalOpIndex.size() + 1 ; i++)
+		if(logicalOpIndex.size() != 0)
 		{
-			ArrayList<String> test = new ArrayList<String>();
-			//System.out.println(start);
+			int count = 0;
+			int start = 0;
+			int end = logicalOpIndex.get(count);
+			
+			//System.out.println(logicalOpIndex);
 			//System.out.println(end);
-			for(int  j = start ; j < end ; j++)
+			//System.out.println(logicalOpIndex.size());
+			for(int i = 0; i < logicalOpIndex.size() + 1 ; i++)
 			{
-				test.add(data.get(j));
-			}
-			//System.out.println(test);
-			conditions.add(test);
-			if(count == logicalOpIndex.size())
-			{
-				break;
-			}
-			start = logicalOpIndex.get(count) + 1;
-			count++;
-			if(count == logicalOpIndex.size())
-			{
-				end = data.size();
-			}
-			else
-			{
-				end = logicalOpIndex.get(count);
+				ArrayList<String> test = new ArrayList<String>();
+				//System.out.println(start);
+				//System.out.println(end);
+				for(int  j = start ; j < end ; j++)
+				{
+					test.add(data.get(j));
+				}
+				//System.out.println(test);
+				conditions.add(test);
+				if(count == logicalOpIndex.size())
+				{
+					break;
+				}
+				start = logicalOpIndex.get(count) + 1;
+				count++;
+				if(count == logicalOpIndex.size())
+				{
+					end = data.size();
+				}
+				else
+				{
+					end = logicalOpIndex.get(count);
+				}
 			}
 		}
 	}
