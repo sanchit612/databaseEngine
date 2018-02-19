@@ -3,4 +3,28 @@
   <groupId>com.practice.assignment</groupId>
   <artifactId>databaseEngine</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <dependencies>
+  <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine -->
+<dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter-engine</artifactId>
+    <version>5.0.0-M4</version>
+    <scope>test</scope>
+</dependency>
+  <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+<dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter-api</artifactId>
+    <version>5.0.0-M4</version>
+    <scope>test</scope>
+</dependency>
+  <!-- https://mvnrepository.com/artifact/org.junit.platform/junit-platform-runner -->
+<dependency>
+    <groupId>org.junit.platform</groupId>
+    <artifactId>junit-platform-runner</artifactId>
+    <version>1.0.0-M4</version>
+    <scope>test</scope>
+</dependency>
+  
+  </dependencies>
 </project>
