@@ -46,6 +46,7 @@ public class Query {
 	}
 
 	public void setSource(ArrayList<String> data) {
+		//for a single source. If there are multiple files, use reg ex
 		int fromIndex = data.indexOf("from");
 		if(fromIndex != -1)
 		{
@@ -86,12 +87,17 @@ public class Query {
 				filterPart.add(data.get(i));
 			}
 		}
+		else
+		{
+			System.out.println("Query has no filter part");
+		}
 	}
 
+	/*from here control goes to AND OR NOT LOGICAL functions*/
 	public ArrayList<ArrayList<String>> getConditions() {
 		return conditions;
 	}
-
+	
 	public void setConditions(ArrayList<String> data) {
 		if(logicalOpIndex.size() != 0)
 		{
@@ -129,8 +135,20 @@ public class Query {
 				}
 			}
 		}
+		else
+		{
+			ArrayList<String> test = new ArrayList<String>();
+			for(int i = 0; i < data.size() ; i++)
+			{
+				test.add(data.get(i));
+			}
+			conditions.add(test);
+		}
 	}
 
+
+	
+	
 	public ArrayList<Integer> getAndIndex() {
 		return andIndex;
 	}
@@ -189,26 +207,30 @@ public class Query {
 		
 		Collections.sort(logicalOpIndex);
 	}
+	
+	/*from here control goes to conditions part*/
 
 	public ArrayList<String> getLogicalOpSeq() {
 		return logicalOpSeq;
 	}
 
 	public void setLogicalOpSeq(ArrayList<String> data) {
-		int count = 0;
-		for(int i = 0; i < data.size(); i++)
+		if(logicalOpIndex.size() != 0)
 		{
-			if(i == logicalOpIndex.get(count))
+			int count = 0;
+			for(int i = 0; i < data.size(); i++)
 			{
-				logicalOpSeq.add(data.get(i));
-				count++;
-			}
-			if(count == logicalOpIndex.size())
-			{
-				break;
+				if(i == logicalOpIndex.get(count))  //handle exception here
+				{
+					logicalOpSeq.add(data.get(i));
+					count++;
+				}
+				if(count == logicalOpIndex.size())
+				{
+					break;
+				}
 			}
 		}
-		
 	}
 
 	public ArrayList<String> getSelectFields() {
@@ -329,14 +351,20 @@ public class Query {
 	}
 
 	public void setAggregateFields(ArrayList<String> data) {
+		//handle the comma values, spaces using regex. will do in future. done for now
 		for(int i = 0; i < data.size();i++) {
+			//System.out.println(data.get(i).length());
 			if(data.get(i).length()>4)
 			{
-			if(data.get(i).substring(0,3).equals("min(") ||
-					data.get(i).substring(0,3).equals("max(") ||
-					data.get(i).substring(0,3).equals("sum(") ||
-					data.get(i).substring(0,3).equals("avg(") ||
-					data.get(i).substring(0,5).equals("count(")
+				//System.out.println(data.get(i).substring(0,3));
+				
+				//System.out.println(data.get(i).substring(0,3).equals("min("));
+				
+			if(data.get(i).substring(0,4).equals("min(") ||
+					data.get(i).substring(0,4).equals("max(") ||
+					data.get(i).substring(0,4).equals("sum(") ||
+					data.get(i).substring(0,4).equals("avg(") ||
+					data.get(i).substring(0,6).equals("count(")
 			  )
 			{
 				aggregateFields.add(data.get(i));
