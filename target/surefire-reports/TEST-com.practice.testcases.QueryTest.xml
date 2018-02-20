@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="com.practice.testcases.QueryTest" time="0.015" errors="0" skipped="0">
+<testsuite tests="1" failures="0" name="com.practice.testcases.QueryTest" time="0.009" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/jdk1.8.0_162/jre/lib/amd64"/>
     <property name="java.vm.version" value="25.162-b12"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
-    <property name="maven.multiModuleProjectDirectory" value="/home/sancz/Documents/workspace-sts-3.9.2.RELEASE/databaseEngine"/>
+    <property name="maven.multiModuleProjectDirectory" value="/home/sapient/Documents/workspace-sts-3.9.2.RELEASE/databaseEngine"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="path.separator" value=":"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value="unknown"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/home/sancz/Documents/workspace-sts-3.9.2.RELEASE/databaseEngine"/>
+    <property name="user.dir" value="/home/sapient/Documents/workspace-sts-3.9.2.RELEASE/databaseEngine"/>
     <property name="java.runtime.version" value="1.8.0_162-b12"/>
     <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="/usr/lib/jvm/jdk1.8.0_162/jre/lib/endorsed"/>
@@ -25,20 +25,20 @@
 "/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="os.name" value="Linux"/>
-    <property name="classworlds.conf" value="/home/sancz/Documents/workspace-sts-3.9.2.RELEASE/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf6860222356889772555.tmp"/>
+    <property name="classworlds.conf" value="/home/sapient/Documents/workspace-sts-3.9.2.RELEASE/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf5410276439083410075.tmp"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="os.version" value="4.13.0-32-generic"/>
-    <property name="user.home" value="/home/sancz"/>
+    <property name="user.home" value="/home/sapient"/>
     <property name="user.timezone" value="Asia/Kolkata"/>
     <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.specification.version" value="1.8"/>
-    <property name="user.name" value="sancz"/>
-    <property name="java.class.path" value="/home/sancz/sts-bundle/sts-3.9.2.RELEASE/plugins/org.eclipse.m2e.maven.runtime_1.8.2.20171007-0216/jars/plexus-classworlds-2.5.2.jar"/>
+    <property name="user.name" value="sapient"/>
+    <property name="java.class.path" value="/home/sapient/sts-bundle/sts-3.9.2.RELEASE/plugins/org.eclipse.m2e.maven.runtime_1.8.2.20171007-0216/jars/plexus-classworlds-2.5.2.jar"/>
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="/usr/lib/jvm/jdk1.8.0_162/jre"/>
@@ -52,7 +52,7 @@
     <property name="securerandom.source" value="file:/dev/./urandom"/>
     <property name="sun.boot.class.path" value="/usr/lib/jvm/jdk1.8.0_162/jre/lib/resources.jar:/usr/lib/jvm/jdk1.8.0_162/jre/lib/rt.jar:/usr/lib/jvm/jdk1.8.0_162/jre/lib/sunrsasign.jar:/usr/lib/jvm/jdk1.8.0_162/jre/lib/jsse.jar:/usr/lib/jvm/jdk1.8.0_162/jre/lib/jce.jar:/usr/lib/jvm/jdk1.8.0_162/jre/lib/charsets.jar:/usr/lib/jvm/jdk1.8.0_162/jre/lib/jfr.jar:/usr/lib/jvm/jdk1.8.0_162/jre/classes"/>
     <property name="java.vendor" value="Oracle Corporation"/>
-    <property name="maven.home" value="/home/sancz/Documents/workspace-sts-3.9.2.RELEASE/databaseEngine/EMBEDDED"/>
+    <property name="maven.home" value="/home/sapient/Documents/workspace-sts-3.9.2.RELEASE/databaseEngine/EMBEDDED"/>
     <property name="file.separator" value="/"/>
     <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -60,5 +60,5 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="QueryTest" name="testTokens()" time="0.015"/>
+  <testcase classname="QueryTest" name="testTokens()" time="0.009"/>
 </testsuite>

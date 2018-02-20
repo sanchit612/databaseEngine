@@ -34,11 +34,15 @@ public class Query {
 		return tokens;
 	}
 
-	public void setTokens(String data) {
-		StringTokenizer st = new StringTokenizer(input);
+	public ArrayList<String> setTokens(String data) {
+		ArrayList<String> test = new ArrayList<String>();
+		StringTokenizer st = new StringTokenizer(data);
 		while (st.hasMoreTokens()) {  
 			tokens.add(st.nextToken());
 	    }
+		test = tokens;
+		//System.out.println(test);
+		return test;
 	}
 
 	public String getSource() {

@@ -9,11 +9,11 @@ public class Steps {
 		Scanner sc = new Scanner(System.in);    //System.in is input stream class.  System.out is an output stream class. sc is a pointer
 		Query query = new Query();		//creating a new object of query
 		
-		query.setInput(sc.nextLine());		//taking input from user
-		sc.close();		//closing the scanner
+		//query.setInput(sc.nextLine());		//taking input from user
+		//sc.close();		//closing the scanner
 				
-		query.setTokens(query.getInput());
-		
+		//query.setTokens(query.getInput());
+		query.setTokens("select * from sanchit");
 		System.out.println("Words in query : ");
 		for(String i : query.getTokens()) {
 			System.out.print(i + " : ");
@@ -99,19 +99,34 @@ public class Steps {
 			System.out.println(i);
 		}
 		System.out.println();
-		
-		FileRead fr = new FileRead();
-		try {
-		fr.readFile();
-		}
-		catch(Exception e)
-		{
-			System.out.println("unable to find file");
+		        
+	        //object for performing methods on file
+	        FileRead fc = new FileRead();
+	        ArrayList<String[]> al = new ArrayList<String[]>();
+	        //contains all the data from the csv file in a 2d array format
+	        al = fc.allData();
+	        //contains the datatype of each column
+	        ArrayList<String> data = fc.getDatatype(al);
+	        
+	     /*   //fields to be displayed
+	        String[] fields = qp.fields(user_query);
+	        String pop = fields[0] ;
+	        System.out.println(fields[0]);
+	     */   
+	       /* //to display all
+	        if(fields[0].equals(" * ")) {
+		    	for(String s[]: al)
+		    		for(String s1 : s)
+		    			System.out.println(s1);
+	        }*/
+	        
+	        for(String s : al.get(9))
+	        	System.out.println(s);
+	        	
+	        sc.close();
 		}
 		
 	}
-
-}
 
 //regex
 //test cases
