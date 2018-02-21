@@ -40,6 +40,19 @@ public class Query {
 		while (st.hasMoreTokens()) {  
 			tokens.add(st.nextToken());
 	    }
+		//System.out.println(tokens.size());
+		//System.out.println(tokens.get(0).toLowerCase());
+		//System.out.println(tokens.get(2).toLowerCase());
+		if(tokens.size() < 4)
+		{
+			System.out.println("Not a valid query");
+			System.exit(0);
+		}
+		if(!tokens.get(0).toLowerCase().contentEquals("select") || !tokens.contains("from"))
+		{
+			System.out.println("Not a valid query");
+			System.exit(0);
+		}
 		test = tokens;
 		//System.out.println(test);
 		return test;
@@ -52,7 +65,7 @@ public class Query {
 	public void setSource(ArrayList<String> data) {
 		//for a single source. If there are multiple files, use reg ex
 		int fromIndex = data.indexOf("from");
-		if(fromIndex != -1)
+		if(fromIndex != -1 &&  (fromIndex != data.size()-1))
 		{
 			source =  data.get(fromIndex+1);
 		}
@@ -243,6 +256,7 @@ public class Query {
 
 	public void setSelectFields(ArrayList<String> data) {
 		int fromIndex = data.indexOf("from");
+		//regex for A,B
 		//System.out.println(fromIndex);
 		//System.out.println(basePart);
 		for(int i = 1; i < fromIndex ; i++)
@@ -358,7 +372,7 @@ public class Query {
 		//handle the comma values, spaces using regex. will do in future. done for now
 		for(int i = 0; i < data.size();i++) {
 			//System.out.println(data.get(i).length());
-			if(data.get(i).length()>4)
+			if(data.get(i).length()>6)
 			{
 				//System.out.println(data.get(i).substring(0,3));
 				
@@ -373,7 +387,13 @@ public class Query {
 			{
 				aggregateFields.add(data.get(i));
 			}
-		}	
+		}
+			
+		}
+		
+		if(aggregateFields.size() == 0 )
+		{
+			System.out.println("Query does not have aggregate field");
 		}
 	}
 

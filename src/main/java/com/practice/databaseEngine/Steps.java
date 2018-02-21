@@ -9,11 +9,13 @@ public class Steps {
 		Scanner sc = new Scanner(System.in);    //System.in is input stream class.  System.out is an output stream class. sc is a pointer
 		Query query = new Query();		//creating a new object of query
 		
-		//query.setInput(sc.nextLine());		//taking input from user
+		query.setInput(sc.nextLine());		//taking input from user
 		//sc.close();		//closing the scanner
 				
-		//query.setTokens(query.getInput());
-		query.setTokens("select * from sanchit");
+		query.setTokens(query.getInput());
+		//query.setTokens("select * from sanchit");  //hard coded value
+		
+		
 		System.out.println("Words in query : ");
 		for(String i : query.getTokens()) {
 			System.out.print(i + " : ");
@@ -100,13 +102,25 @@ public class Steps {
 		}
 		System.out.println();
 		        
-	        //object for performing methods on file
-	        FileRead fc = new FileRead();
-	        ArrayList<String[]> al = new ArrayList<String[]>();
+	    //object for performing methods on file
+	    FileRead fr = new FileRead();
+	    fr.getData(0,1);
+	    fr.getData(1, 1);
+	    fr.setDataType(fr.getRandomDataFirstRow());
+	   /* 
+	    for(int i = 0 ; i < fr.getDataType().length;i++)
+	    {
+	    	for(int j = 0 ; j < fr.getDataTypeLength() ;j++)
+	    	{
+	    		System.out.println(fr.getDataType());
+	    	}
+	    }*/
+	    
+	     //   ArrayList<ArrayList<String>> heading = new ArrayList<ArrayList<String>>();
 	        //contains all the data from the csv file in a 2d array format
-	        al = fc.allData();
+	       // al = fr.getData();
 	        //contains the datatype of each column
-	        ArrayList<String> data = fc.getDatatype(al);
+	        //ArrayList<String> data = fc.getDatatype(al);
 	        
 	     /*   //fields to be displayed
 	        String[] fields = qp.fields(user_query);
@@ -120,17 +134,19 @@ public class Steps {
 		    			System.out.println(s1);
 	        }*/
 	        
-	        for(String s : al.get(9))
-	        	System.out.println(s);
+	        //for(String s : al.get(9))
+	        	//System.out.println(s);
 	        	
 	        sc.close();
+	        
+	        
 		}
 		
 	}
 
 //regex
 //test cases
-
+// Select heelo dfjd jd from
 // Select * from ipl.csv
 // Select * from ipl.csv where hello = "true"
 //select A , B , avg(win_by_wickets) , min(win_by_runs) from ipl.csv where season > 2016 and city= 'Bangalore' order by hello , bye group by qwerty
