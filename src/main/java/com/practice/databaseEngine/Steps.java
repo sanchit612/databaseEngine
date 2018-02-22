@@ -108,50 +108,20 @@ public class Steps {
 	    fr.setHeading();
 	    fr.setRandomDataFirstRow();
 	    fr.setDataType(fr.getRandomDataFirstRow());
-	    
-	    
 	    fr.getDataType();
-	   /* 
-	    for(int i = 0 ; i < fr.getDataType().length;i++)
-	    {
-	    	for(int j = 0 ; j < fr.getDataTypeLength() ;j++)
-	    	{
-	    		System.out.println(fr.getDataType());
-	    	}
-	    }*/
+	    sc.close();
 	    
-	     //   ArrayList<ArrayList<String>> heading = new ArrayList<ArrayList<String>>();
-	        //contains all the data from the csv file in a 2d array format
-	       // al = fr.getData();
-	        //contains the datatype of each column
-	        //ArrayList<String> data = fc.getDatatype(al);
-	        
-	     /*   //fields to be displayed
-	        String[] fields = qp.fields(user_query);
-	        String pop = fields[0] ;
-	        System.out.println(fields[0]);
-	     */   
-	       /* //to display all
-	        if(fields[0].equals(" * ")) {
-		    	for(String s[]: al)
-		    		for(String s1 : s)
-		    			System.out.println(s1);
-	        }*/
-	        
-	        //for(String s : al.get(9))
-	        	//System.out.println(s);
-	        	
-	        sc.close();
-	        
-	        
-		}
-		
+	    //Extracting Data from file
+	    
+		}		
 	}
 
-//regex
-//test cases
+// regex
+// test cases
 // Select heelo dfjd jd from
 // Select * from ipl.csv
 // Select * from ipl.csv where hello = "true"
-//select A , B , avg(win_by_wickets) , min(win_by_runs) from ipl.csv where season > 2016 and city= 'Bangalore' order by hello , bye group by qwerty
-//select A, B, avg(win_by_wickets), min(win_by_runs) from ipl.csv where season > 2016 and city= 'Bangalore' group by qwerty order by hello , bye
+// select A , B , avg(win_by_wickets) , min(win_by_runs) from ipl.csv where season > 2016 and city= 'Bangalore' order by hello , bye group by qwerty
+// select A, B, avg(win_by_wickets), min(win_by_runs) from ipl.csv where season > 2016 and city= 'Bangalore' group by qwerty order by hello , bye
+// select A , B , avg(win_by_wickets) , min(win_by_runs) from ipl.csv where season > 2016 and city= 'Bangalore' or date = "12-02-2014" order by hello , bye group by qwerty, geep
+// select city , date , avg(win_by_wickets) , min(win_by_runs) from ipl.csv where season > 2010 and city= 'Bangalore' or field = 'bat' order by season , id group by team1   

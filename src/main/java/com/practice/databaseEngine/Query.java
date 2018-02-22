@@ -116,6 +116,8 @@ public class Query {
 	}
 	
 	public void setConditions(ArrayList<String> data) {
+		int orderIndex = data.indexOf("order");
+		int groupIndex = data.indexOf("group");
 		if(logicalOpIndex.size() != 0)
 		{
 			int count = 0;
@@ -144,7 +146,30 @@ public class Query {
 				count++;
 				if(count == logicalOpIndex.size())
 				{
-					end = data.size();
+					if((orderIndex != -1) && (groupIndex != -1))
+					{
+						if(orderIndex < groupIndex)
+						{
+							end = orderIndex;
+						}
+						else
+						{
+							end = groupIndex;
+						}
+					}
+					
+					else if((orderIndex != -1) && (groupIndex == -1))
+					{
+						end = orderIndex;
+					}
+					else if((orderIndex == -1) && (groupIndex != -1))
+					{
+						end = groupIndex;
+					}
+					else
+					{
+						end = data.size();
+					}
 				}
 				else
 				{
@@ -162,9 +187,6 @@ public class Query {
 			conditions.add(test);
 		}
 	}
-
-
-	
 	
 	public ArrayList<Integer> getAndIndex() {
 		return andIndex;
@@ -176,7 +198,7 @@ public class Query {
 			{
 				andIndex.add(i);
 			}	
-	}
+		}
 	}
 		
 	public ArrayList<Integer> getOrIndex() {
