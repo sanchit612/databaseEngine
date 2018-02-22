@@ -6,47 +6,39 @@ import java.util.regex.*;
 
 public class FileRead {
 	
-	private ArrayList<ArrayList<String>> heading = new ArrayList<ArrayList<String>>();
-	private ArrayList<ArrayList<String>> randomDataFirstRow = new ArrayList<ArrayList<String>>();
-	private String[][] dataType = new String[heading.size()][2];
+	private ArrayList<ArrayList<String>> rowList = new ArrayList<ArrayList<String>>();
+	private ArrayList<String> heading = new ArrayList<String>();
+	private ArrayList<String> randomDataFirstRow = new ArrayList<String>();
+	private String[][] dataType = new String[3][];
 	
-	public ArrayList<ArrayList<String>> getHeading(){
+	public ArrayList<ArrayList<String>> getRowList(){
+		return rowList;
+	}
+	
+	public ArrayList<String> getHeading(){
 		return heading;
 	}
 	
-	public ArrayList<ArrayList<String>> getRandomDataFirstRow(){
+	public ArrayList<String> getRandomDataFirstRow(){
 		return randomDataFirstRow;
 	}
 	
-	public ArrayList<ArrayList<String>> getData(int startRowNumber, int numberOfRows) {
+	public ArrayList<ArrayList<String>> setRowList() {
 		BufferedReader br = null;
         //list of string arrays
-        ArrayList<ArrayList<String>> rowList = new ArrayList<ArrayList<String>>();
+        
         try {
-			br = new BufferedReader(new FileReader("/home/sapient/Documents/ipl.csv"));
+			br = new BufferedReader(new FileReader("./ipl.csv"));
 			String line;
 			
 	        //got the column names
 			while ((line = br.readLine()) != null) {
-				ArrayList<String> arr = new ArrayList<String>(Arrays.asList(line.split(",")));
+				ArrayList<String> arr = new ArrayList<String>(Arrays.asList(line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)")));
 		        //everything stored in this list
 				rowList.add(arr);
 			}
 			//System.out.println(rowList.get(0));
 			//System.out.println(rowList.get(1));
-			if(startRowNumber == 0 && numberOfRows == 1)
-			{
-				
-				heading.add(rowList.get(0));
-				return heading;
-				
-			}
-			
-			if(startRowNumber == 1 && numberOfRows == 1)
-			{
-				randomDataFirstRow.add(rowList.get(1));
-				return randomDataFirstRow;
-			}
 		} 
         
         catch (FileNotFoundException e) {
@@ -64,16 +56,33 @@ public class FileRead {
 		return rowList;
 	}
 	
-	public void setDataType(ArrayList<ArrayList<String>> firstDataRow) {
+	public void setHeading() {
+		//heading.add(rowList.get(0));
+		
+		for(int i=0;i<rowList.get(0).size();i++)
+		{
+			heading.add(rowList.get(0).get(i));
+		}
+		//System.out.println(heading);
+	}
+	
+	public void setRandomDataFirstRow() {
+		
+		for(int i=0;i<rowList.get(2).size();i++)
+		{
+			randomDataFirstRow.add(rowList.get(2).get(i));
+		}
+		//System.out.println(randomDataFirstRow);
+	}
+	public void setDataType(ArrayList<String> firstDataRow) {
 		//contains the first row
-		ArrayList<String> columns = firstDataRow.get(0);
 		//for integers and date
 		Pattern number = Pattern.compile("[0-9]+");
 		Pattern date = Pattern.compile("[0-9]{4}-[0-9]{2}-[0-9]{2}");
 		Matcher m;
 				
 		ArrayList<String> type = new ArrayList<String>();
-		for(String s : columns) {
+		for(String s : firstDataRow) {
 			m = date.matcher(s);
 			if(m.find()) {
 				type.add("Date");
@@ -86,26 +95,49 @@ public class FileRead {
 					type.add("String");
 			}
 		}
-		String[] head = heading.get(0).toArray(new String[0]);
-		String[] col = columns.toArray(new String[0]);
-
-			for(int j = 0 ; j < head.length;j++)
-			{
-				dataType[j][0] = head[j];
-				dataType[j][1] = col[j];
-			}
+		int z = heading.size();
+		//System.out.println(z);
+		int y = randomDataFirstRow.size();
+		int x = type.size();
+		dataType[0] = new String[z];
+		dataType[1] = new String[y];
+		dataType[2] = new String[x];
+		for(int j = 0;j<z;j++)
+		{
+			dataType[0][j] = heading.get(j);
 			
-			for(int i = 0;i<2;i++)
-			{
-				for(int j = 0;j<head.length;j++)
-				{
-					System.out.println(dataType[i][j]);
-				}
-			}
+		}
+		for(int j = 0;j<y;j++)
+		{
+		dataType[1][j] = randomDataFirstRow.get(j);
+		}
+		//System.out.println(dataType[0].length);
+		for(int j = 0;j<x;j++)
+		{
+		dataType[2][j] = type.get(j);
+		}
+
 	}
 	
-	public String[][] getDataType()
+	public void getDataType()
 	{
-		return dataType;
+		
+	    for(int i=0;i<(dataType[0].length);i++)
+	    {
+	    	for(int j = 0;j<3;j++)
+	    	{
+	    		if(dataType[j][i].length() <8)
+	    		{
+	    		System.out.print(dataType[j][i]);
+	    		System.out.print("\t\t\t\t");
+	    		}
+	    		else
+	    		{
+	    			System.out.print(dataType[j][i]);
+		    		System.out.print("\t\t\t");
+	    		}
+	    	}
+	    	System.out.println();
+	    }
 	}
 }

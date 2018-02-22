@@ -104,9 +104,13 @@ public class Steps {
 		        
 	    //object for performing methods on file
 	    FileRead fr = new FileRead();
-	    fr.getData(0,1);
-	    fr.getData(1, 1);
+	    fr.setRowList();
+	    fr.setHeading();
+	    fr.setRandomDataFirstRow();
 	    fr.setDataType(fr.getRandomDataFirstRow());
+	    
+	    
+	    fr.getDataType();
 	   /* 
 	    for(int i = 0 ; i < fr.getDataType().length;i++)
 	    {
