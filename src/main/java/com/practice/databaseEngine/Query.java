@@ -418,8 +418,26 @@ public class Query {
 			System.out.println("Query does not have aggregate field");
 		}
 	}
-
-
+	/*
+	Query(Query obj){
+		input = obj.input;
+		tokens  = obj.tokens;
+		source = obj.source;
+		basePart = obj.basePart;
+		filterPart = obj.filterPart;
+		conditions = obj.conditions;
+		andIndex = obj.andIndex;
+		orIndex = obj.orIndex;
+		notIndex = obj.notIndex;
+		logicalOpIndex = obj.logicalOpIndex;
+		logicalOpSeq = obj.logicalOpSeq;
+		selectFields = obj.selectFields;
+		orderByFields = obj.orderByFields;
+		groupByFields = obj.groupByFields;
+		aggregateFields = obj.aggregateFields;
+		
+	}
+	*/
 
 
 

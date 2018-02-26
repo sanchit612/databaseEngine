@@ -111,6 +111,9 @@ public class Steps {
 	    fr.getDataType();
 	    sc.close();
 	    
+	    FilterData fd = new FilterData();
+	    fd.getPrintSelectFields(query);;
+	    
 	    //Extracting Data from file
 	    
 		}		
