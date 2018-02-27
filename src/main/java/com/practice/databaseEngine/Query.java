@@ -192,7 +192,7 @@ public class Query {
 		return andIndex;
 	}
 
-	public void setAddIndex(ArrayList<String> data) {
+	public void setAndIndex(ArrayList<String> data) {
 		for(int i = 0; i < data.size();i++) {
 			if(data.get(i).equals("and"))
 			{

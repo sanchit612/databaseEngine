@@ -48,7 +48,7 @@ public class Steps {
 		System.out.println();
 		
 		
-		query.setAddIndex(query.getFilterPart());
+		query.setAndIndex(query.getFilterPart());
 		query.setOrIndex(query.getFilterPart());
 		query.setNotIndex(query.getFilterPart());
 		
