@@ -1,7 +1,7 @@
 package com.practice.databaseEngine;
-import java.io.*;
+//import java.io.*;
 import java.util.*;
-import java.util.regex.*;
+//import java.util.regex.*;
 import org.json.JSONObject;
 
 public class FilterData {
@@ -11,25 +11,35 @@ public class FilterData {
 		System.out.println(qr.getSelectFields());
 	}
 	
-	public static void createJSON(Query qr,FileRead fr) {    
+	public void createJSON(Query qr,FileRead fr) {    
 	    JSONObject queryJsonObj = new JSONObject();
 	    
-	    ArrayList<String> allFields = new ArrayList<String>();
-	    allFields.add("*");
+	    //fr.getHeading().size()
+	    //fr.getRowList().size()
 	    
-	    if(qr.getSelectFields() == allFields)
+	    if(qr.getSelectFields().size() == 1 && qr.getSelectFields().contains("*"))
 	    {
-	    	for(int i = 0;i<fr.getHeading().size();i++)
+	    	for(int i = 0;i<3;i++)
 	    	{
-	    		
+	    		ArrayList<String> al = new ArrayList<String>();
+	    		for(int j=1;j<10;j++)
+	    		{
+	    			al.add(fr.getRowList().get(j).get(i));
+	    		}
+		    	queryJsonObj.put(fr.getHeading().get(i), al);
 	    	}
+	    	
+	    	System.out.println(queryJsonObj.toString());
 	    }
 	    
-	    for(int i = 0;i<qr.getSelectFields().size();i++)
-	    {
-	    	ArrayList<String> al = new ArrayList<String>();
-	    	queryJsonObj.put(qr.getSelectFields().get(i), al);
-	    	
+	    else {
+	    
+		    for(int i = 0;i<qr.getSelectFields().size();i++)
+		    {
+		    	ArrayList<String> al = new ArrayList<String>();
+		    	queryJsonObj.put(qr.getSelectFields().get(i), al);
+		    	
+		    }
 	    }
 	    
 	    /*
