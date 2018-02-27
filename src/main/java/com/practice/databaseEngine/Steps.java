@@ -112,7 +112,7 @@ public class Steps {
 	    sc.close();
 	    
 	    FilterData fd = new FilterData();
-	    fd.getPrintSelectFields(query);;
+	    fd.getPrintSelectFields(query);
 	    
 	    //Extracting Data from file
 	    

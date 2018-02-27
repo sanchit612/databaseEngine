@@ -11,13 +11,25 @@ public class FilterData {
 		System.out.println(qr.getSelectFields());
 	}
 	
-	public static void createJSON(Query qr) {    
+	public static void createJSON(Query qr,FileRead fr) {    
 	    JSONObject queryJsonObj = new JSONObject();
+	    
+	    ArrayList<String> allFields = new ArrayList<String>();
+	    allFields.add("*");
+	    
+	    if(qr.getSelectFields() == allFields)
+	    {
+	    	for(int i = 0;i<fr.getHeading().size();i++)
+	    	{
+	    		
+	    	}
+	    }
 	    
 	    for(int i = 0;i<qr.getSelectFields().size();i++)
 	    {
 	    	ArrayList<String> al = new ArrayList<String>();
 	    	queryJsonObj.put(qr.getSelectFields().get(i), al);
+	    	
 	    }
 	    
 	    /*
