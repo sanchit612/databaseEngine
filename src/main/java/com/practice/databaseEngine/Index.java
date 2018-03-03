@@ -2,10 +2,9 @@ package com.practice.databaseEngine;
 //we need to import java.util package . java.lang package imports automatically
 import java.util.*;
 
-public class Steps {
+public class Index {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		Scanner sc = new Scanner(System.in);    //System.in is input stream class.  System.out is an output stream class. sc is a pointer
 		Query query = new Query();		//creating a new object of query
 		
@@ -18,7 +17,11 @@ public class Steps {
 		
 		System.out.println("Words in query : ");
 		for(String i : query.getTokens()) {
-			System.out.print(i + " : ");
+			if(i.contentEquals(","))
+			{
+				continue;
+			}   
+			System.out.println("  "+i);
 		}
 		System.out.println();
 		System.out.println();
