@@ -6,7 +6,6 @@ import org.json.JSONObject;
 
 public class FilterData {
 	
-
 	void getPrintSelectFields(Query qr) {
 		System.out.println(qr.getSelectFields());
 	}
@@ -26,6 +25,7 @@ public class FilterData {
 	    		{
 	    			al.add(fr.getRowList().get(j).get(i));
 	    		}
+	    		System.out.println(al);
 		    	queryJsonObj.put(fr.getHeading().get(i), al);
 	    	}
 	    	
