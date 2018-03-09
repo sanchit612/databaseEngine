@@ -1,22 +1,15 @@
 package com.practice.databaseEngine;
 //we need to import java.util package . java.lang package imports automatically
-import java.util.*;
+
+import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Index {
-
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);    //System.in is input stream class.  System.out is an output stream class. sc is a pointer
-		Query query = new Query();		//creating a new object of query
-		
-		query.setInput(sc.nextLine());		//taking input from user
-		//sc.close();		//closing the scanner
-				
-		query.setTokens(query.getInput());
-		//query.setTokens("select * from sanchit");  //hard coded value
-		
+	
+	public void printTokens(Query objQuery) {
 		
 		System.out.println("Words in query : ");
-		for(String i : query.getTokens()) {
+		for(String i : objQuery.getTokens()) {
 			if(i.contentEquals(","))
 			{
 				continue;
@@ -25,36 +18,75 @@ public class Index {
 		}
 		System.out.println();
 		System.out.println();
+	}
+	
+	public void printSource(Query objQuery) {
 		
-		
-		System.out.println("Filename : ");
-		query.setSource(query.getTokens());
-		System.out.println(query.getSource());
+		System.out.println("Source : ");
+		objQuery.setSource(objQuery.getTokens());
+		System.out.println(objQuery.getSource());
 		System.out.println();
-		
+	}
+	
+	public void printBasePart(Query objQuery) {
 		
 		System.out.println("Base Part : ");
-		query.setBasePart(query.getTokens());
-		for(String i : query.getBasePart()) {
+		objQuery.setBasePart(objQuery.getTokens());
+		for(String i : objQuery.getBasePart()) {
 			System.out.print(i + " ");
 		}
 		System.out.println();
 		System.out.println();
 		
+	}
+	
+	public void printFilterPart(Query objQuery) {
 		
 		System.out.println("Filter Part : ");
-		query.setFilterPart(query.getTokens());
-		for(String i : query.getFilterPart()) {
+		objQuery.setFilterPart(objQuery.getTokens());
+		for(String i : objQuery.getFilterPart()) {
 			System.out.print(i + " ");
 		}
 		System.out.println();
 		System.out.println();
 		
+	}
+
+	public static void main(String[] args) {
+		//System.in is input stream class.  System.out is an output stream class. sc is a pointer
+		Scanner sc = new Scanner(System.in);
 		
+		//creating a new object of query
+		Query query = new Query();		
+		
+		//taking input from user and initializing input
+		query.setInput(sc.nextLine());
+		
+		//initializing tokens		
+		query.setTokens(query.getInput());
+		
+		// printing the tokens
+		new Index().printTokens(query);
+		
+		// printing the base part
+	    new Index().printBasePart(query);
+		
+		// printing the source
+		new Index().printSource(query);
+		
+		// printing the filter part
+		new Index().printFilterPart(query);
+		
+		//setting index of 'AND'
 		query.setAndIndex(query.getFilterPart());
+		
+		//setting index of 'OR'
 		query.setOrIndex(query.getFilterPart());
+		
+		//setting index of 'NOT'
 		query.setNotIndex(query.getFilterPart());
 		
+		//setting indexes of all three logical operators
 		query.setLogicalOpIndex();
 		
 		System.out.println("Conditions : ");

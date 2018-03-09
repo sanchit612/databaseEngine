@@ -1,116 +1,239 @@
 package com.practice.databaseEngine;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
+import edu.emory.mathcs.backport.java.util.Collections;
 
 public class Query {
 	
-
+	//Query in the form of string
 	private String input;
+	
+	// Token form of string
 	private ArrayList<String> tokens  = new ArrayList<String>();
+	
+	// Source to fetch data from
 	private String source;
+	
+	// Base part of query - Select * from ipl.csv
 	private ArrayList<String> basePart = new ArrayList<String>();
+	
+	// Filter part of query - city = "Chennai" and .....
 	private ArrayList<String> filterPart = new ArrayList<String>();
+	
+	// All conditions listed
 	private ArrayList<ArrayList<String>> conditions = new ArrayList<ArrayList<String>>();
+	
+	//Position of index of keyword 'and' based on tokens
 	private ArrayList<Integer> andIndex = new ArrayList<Integer>();
+	
+	//Position of index of keyword 'or' based on tokens
 	private ArrayList<Integer> orIndex = new ArrayList<Integer>();
+	
+	//Position of index of keyword 'not' based on tokens
 	private ArrayList<Integer> notIndex = new ArrayList<Integer>();
+	
+	//Position of index of all logical operators based on tokens
 	private ArrayList<Integer> logicalOpIndex = new ArrayList<Integer>();
+	
+	// List of logical operators in sequence
 	private ArrayList<String> logicalOpSeq = new ArrayList<String>();
+	
+	//List of select fields
 	private ArrayList<String> selectFields = new ArrayList<String>();
+	
+	//List of order By fields
 	private ArrayList<String> orderByFields = new ArrayList<String>();
+	
+	//List of group By fields
 	private ArrayList<String> groupByFields = new ArrayList<String>();
+	
+	// List of aggregate functions
 	private ArrayList<String> aggregateFields = new ArrayList<String>();
 
 
-
+	// getting input variable
 	public String getInput() {
 		return input;
 	}
 
+	//setting input variable
 	public void setInput(String data) {
 		input = data;
 	}
 
+	//getting tokens variable
 	public ArrayList<String> getTokens() {
 		return tokens;
 	}
-
+	
+	//setting tokens variable
 	public ArrayList<String> setTokens(String data) {
+		
+		//for test case purposes
 		ArrayList<String> test = new ArrayList<String>();
+		
 		StringTokenizer st = new StringTokenizer(data);
 		while (st.hasMoreTokens()) {  
 			tokens.add(st.nextToken());
 	    }
-		//System.out.println(tokens.size());
-		//System.out.println(tokens.get(0).toLowerCase());
-		//System.out.println(tokens.get(2).toLowerCase());
-		if(tokens.size() < 4)
-		{
+		
+		//checking for invalid queries
+		//if word count of query is less than 4
+		if(tokens.size() < 4){
 			System.out.println("Not a valid query");
 			System.exit(0);
-		}
-		if(!tokens.get(0).toLowerCase().contentEquals("select") || !tokens.contains("from"))
-		{
-			System.out.println("Not a valid query");
-			System.exit(0);
-		}
-		test = tokens;
-		//System.out.println(test);
-		return test;
-	}
-
-	public String getSource() {
-		return source;
-	}
-
-	public void setSource(ArrayList<String> data) {
-		//for a single source. If there are multiple files, use reg ex
-		int fromIndex = data.indexOf("from");
-		if(fromIndex != -1 &&  (fromIndex != data.size()-1))
-		{
-			source =  data.get(fromIndex+1);
 		}
 		
+		//if first word is not select or third word is not for
+		if(!tokens.get(0).toLowerCase().contentEquals("select") || !tokens.contains("from")){
+			System.out.println("Not a valid query");
+			System.exit(0);
+		}
+		
+		//for test cases
+		test = tokens;
+		return test;
 	}
-
+	
+	//getting the base part
 	public ArrayList<String> getBasePart() {
 		return basePart;
 	}
 
+	//setting the base part
 	public void setBasePart(ArrayList<String> data) {
+		
+		// finding the index of where keyword
 		int whereIndex = data.indexOf("where");
-		if(whereIndex != -1)
-		{
+		
+		// if where is present
+		if(whereIndex != -1){
 			for(int i=0 ; i < whereIndex ; i++) {
 				basePart.add(data.get(i));
 			}
-		}
-		else
+		}else
 		{
 			for(int i=0 ; i < data.size() ; i++) {
 				basePart.add(data.get(i));
 			}
 		}
 	}
-
+	
+	// getting source
+	public String getSource() {
+		return source;
+	}
+	
+	// setting source
+	public void setSource(ArrayList<String> data) {
+	
+		//it is for a single source. If there are multiple files, use reg ex
+		//finding the index of FROM since source will be just after this keyword
+		int fromIndex = data.indexOf("from");
+		
+		// if from is present and from is not the last token of query ( a wrong query )
+		if(fromIndex != -1 &&  (fromIndex != data.size()-1)){
+			source =  data.get(fromIndex+1);
+		}
+		
+	}
+	
+	//getting the filter part
 	public ArrayList<String> getFilterPart() {
 		return filterPart;
 	}
-
+	
+	//setting the filter part
 	public void setFilterPart(ArrayList<String> data) {
+		
+		//finding the index of where
 		int whereIndex = data.indexOf("where");
-		if(whereIndex != -1)
-		{
+		
+		//if where is present
+		if(whereIndex != -1){
 			for(int i=whereIndex+1 ; i < data.size() ; i++) {
 				filterPart.add(data.get(i));
 			}
-		}
-		else
+		}else
 		{
 			System.out.println("Query has no filter part");
 		}
 	}
+	
+	// getting the AND index
+	public ArrayList<Integer> getAndIndex() {
+			return andIndex;
+	}
 
-	/*from here control goes to AND OR NOT LOGICAL functions*/
+	//setting the AND index
+	public void setAndIndex(ArrayList<String> data) {
+			
+		// string comparison for every token	
+		for(int i = 0; i < data.size();i++) {
+			if(data.get(i).equals("and")){
+				andIndex.add(i);
+			}	
+		}
+	}
+		
+	//getting the OR index
+	public ArrayList<Integer> getOrIndex() {
+			return orIndex;
+	}
+	
+	//setting the OR index
+	public void setOrIndex(ArrayList<String> data) {
+		
+		// string comparison for every token
+		for(int i = 0; i < data.size();i++) {
+			if(data.get(i).equals("or")){
+				orIndex.add(i);
+			}	
+		}
+
+	}
+	
+	// getting the NOT index
+	public ArrayList<Integer> getNotIndex() {
+		return notIndex;
+	}
+	
+	//setting the NOT index
+	public void setNotIndex(ArrayList<String> data) {
+		
+		// string comparison for every token
+		for(int i = 0; i < data.size();i++) {
+			if(data.get(i).equals("not")){
+				notIndex.add(i);
+			}	
+		}
+
+	}
+
+	//getting the logical operator index
+	public ArrayList<Integer> getLogicalOpIndex() {
+		return logicalOpIndex;
+	}
+	
+	//setting the logical operator index
+	public void setLogicalOpIndex() {
+		for(int j : andIndex) {
+			logicalOpIndex.add(j);
+		}
+		for(int j : orIndex) {
+			logicalOpIndex.add(j);
+		}
+		for(int j : notIndex) {
+			logicalOpIndex.add(j);
+		}
+		
+		//sorting the indexes. Gives a sorted array list that says I have operator at these indexes
+		Collections.sort(logicalOpIndex);
+	}
+	
+
 	public ArrayList<ArrayList<String>> getConditions() {
 		return conditions;
 	}
@@ -188,65 +311,7 @@ public class Query {
 		}
 	}
 	
-	public ArrayList<Integer> getAndIndex() {
-		return andIndex;
-	}
-
-	public void setAndIndex(ArrayList<String> data) {
-		for(int i = 0; i < data.size();i++) {
-			if(data.get(i).equals("and"))
-			{
-				andIndex.add(i);
-			}	
-		}
-	}
 		
-	public ArrayList<Integer> getOrIndex() {
-			return orIndex;
-		}
-
-	public void setOrIndex(ArrayList<String> data) {
-			for(int i = 0; i < data.size();i++) {
-				if(data.get(i).equals("or"))
-				{
-					orIndex.add(i);
-				}	
-		}
-
-	}
-
-	public ArrayList<Integer> getNotIndex() {
-		return notIndex;
-	}
-
-	public void setNotIndex(ArrayList<String> data) {
-		for(int i = 0; i < data.size();i++) {
-			if(data.get(i).equals("not"))
-			{
-				notIndex.add(i);
-			}	
-	}
-
-	}
-
-	public ArrayList<Integer> getLogicalOpIndex() {
-		return logicalOpIndex;
-	}
-
-	public void setLogicalOpIndex() {
-		for(int j : andIndex) {
-			logicalOpIndex.add(j);
-		}
-		for(int j : orIndex) {
-			logicalOpIndex.add(j);
-		}
-		for(int j : notIndex) {
-			logicalOpIndex.add(j);
-		}
-		
-		Collections.sort(logicalOpIndex);
-	}
-	
 	/*from here control goes to conditions part*/
 
 	public ArrayList<String> getLogicalOpSeq() {
