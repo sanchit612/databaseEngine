@@ -233,102 +233,127 @@ public class Query {
 		Collections.sort(logicalOpIndex);
 	}
 	
-
+	//getting the conditions
 	public ArrayList<ArrayList<String>> getConditions() {
 		return conditions;
 	}
 	
+	//setting the conditions
 	public void setConditions(ArrayList<String> data) {
+		
+		//finding the index of Order and Group
 		int orderIndex = data.indexOf("order");
 		int groupIndex = data.indexOf("group");
+		
+		//if logical operators (AND, OR, NOT) are present
 		if(logicalOpIndex.size() != 0)
 		{
-			int count = 0;
-			int start = 0;
-			int end = logicalOpIndex.get(count);
+			int count = 0;		
+			int start = 0; 		//initializing value of start as zero
+			int end = logicalOpIndex.get(count); //initializing value of end to first logical op's index
 			
-			//System.out.println(logicalOpIndex);
-			//System.out.println(end);
-			//System.out.println(logicalOpIndex.size());
+			//loop will go on for portions divided by logical operators
+			// if there are 3 logical operators then loop will go on 4 times (always +1 times)
 			for(int i = 0; i < logicalOpIndex.size() + 1 ; i++)
 			{
 				ArrayList<String> test = new ArrayList<String>();
-				//System.out.println(start);
-				//System.out.println(end);
 				for(int  j = start ; j < end ; j++)
 				{
-					test.add(data.get(j));
+					test.add(data.get(j));		//test has one condition at the end of this loop
 				}
-				//System.out.println(test);
-				conditions.add(test);
-				if(count == logicalOpIndex.size())
+
+				conditions.add(test);	//that condition is added to conditions variable
+				
+				if(count == logicalOpIndex.size())		//if count points to last logical operator
+					//means we have added the last condition
 				{
 					break;
 				}
-				start = logicalOpIndex.get(count) + 1;
-				count++;
+				
+				start = logicalOpIndex.get(count) + 1;	//start is now next token after logical operator
+				count++;	//count is incremented to show we are dealing with next logical operator
+				
+				//if after incrementing the count, it points to last logical operator
 				if(count == logicalOpIndex.size())
 				{
+					//if order by and group by both are present
 					if((orderIndex != -1) && (groupIndex != -1))
 					{
+						// if order by comes before group by 
 						if(orderIndex < groupIndex)
 						{
 							end = orderIndex;
 						}
+						//group by comes before order by
 						else
 						{
 							end = groupIndex;
 						}
 					}
 					
+					// if group by is absent. Only order by is present
 					else if((orderIndex != -1) && (groupIndex == -1))
 					{
 						end = orderIndex;
 					}
+					
+					//// if order by is absent. Only group by is present
 					else if((orderIndex == -1) && (groupIndex != -1))
 					{
 						end = groupIndex;
 					}
+					
+					//both order by and group by are absent
 					else
 					{
 						end = data.size();
 					}
 				}
+				
+				//count after incrementing does not points to last logical operator
 				else
 				{
 					end = logicalOpIndex.get(count);
 				}
 			}
 		}
+		
+		//if logical operators are not present. only one condition is present
 		else
 		{
 			ArrayList<String> test = new ArrayList<String>();
 			for(int i = 0; i < data.size() ; i++)
 			{
-				test.add(data.get(i));
+				test.add(data.get(i));	//condition is added to test after this loop
 			}
-			conditions.add(test);
+			conditions.add(test); //test is added to conditions variable.
 		}
 	}
 	
-		
-	/*from here control goes to conditions part*/
-
+    //get logical operator sequence
 	public ArrayList<String> getLogicalOpSeq() {
 		return logicalOpSeq;
 	}
-
+	
+	//set logical operator sequence
 	public void setLogicalOpSeq(ArrayList<String> data) {
+		
+		//if logical operators are present
 		if(logicalOpIndex.size() != 0)
 		{
+			//initializing count to 0
 			int count = 0;
+			//traversing through all the filter part
 			for(int i = 0; i < data.size(); i++)
 			{
-				if(i == logicalOpIndex.get(count))  //handle exception here
+				//comparing with indexes of logical operators and making sure we are handling exceptions
+				if((i == logicalOpIndex.get(count)) && (count <logicalOpIndex.size()))
 				{
 					logicalOpSeq.add(data.get(i));
 					count++;
 				}
+				
+				//if index becomes equal to the size of the list
 				if(count == logicalOpIndex.size())
 				{
 					break;
@@ -336,16 +361,20 @@ public class Query {
 			}
 		}
 	}
-
+	
+	// start from here//
+	
+	//get selected fields
 	public ArrayList<String> getSelectFields() {
 		return selectFields;
 	}
-
+	
+	//setting select fields
 	public void setSelectFields(ArrayList<String> data) {
+		
+		//getting index of from
 		int fromIndex = data.indexOf("from");
-		//regex for A,B
-		//System.out.println(fromIndex);
-		//System.out.println(basePart);
+
 		for(int i = 1; i < fromIndex ; i++)
 		{
 			//System.out.println(i);

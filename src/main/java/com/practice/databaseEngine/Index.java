@@ -51,6 +51,72 @@ public class Index {
 		System.out.println();
 		
 	}
+	
+	public void printConditions(Query objQuery) {
+		
+		System.out.println("Conditions : ");
+		objQuery.setConditions(objQuery.getFilterPart());
+		
+		for(ArrayList<String> i : objQuery.getConditions()) {
+			for(String j : i)
+			{
+				System.out.print(j + " ");
+			}
+			System.out.println();
+		}
+		System.out.println();
+	}
+	
+	public void printLogicalOperatorSeq(Query objQuery) {
+		
+		System.out.println("Logical Operators in seq : ");
+		objQuery.setLogicalOpSeq(objQuery.getFilterPart());
+		for(String i : objQuery.getLogicalOpSeq()) {
+			System.out.println(i);
+		}
+		System.out.println();
+	}
+	
+	public void printSelectFields(Query objQuery) {
+		
+		System.out.println("Select Fields : ");
+		objQuery.setSelectFields(objQuery.getBasePart());
+		
+		for(String i : objQuery.getSelectFields()) {
+			System.out.println(i);
+		}
+		System.out.println();
+	}
+	
+	public void printOrderByFields(Query objQuery) {
+		
+		System.out.println("Order By Fields : ");
+		objQuery.setOrderByFields(objQuery.getFilterPart());
+		for(String i : objQuery.getOrderByFields()) {
+			System.out.println(i);
+		}
+		System.out.println();
+	}
+	
+	public void printGroupByFields(Query objQuery) {
+		
+		System.out.println("Group By Fields : ");
+		objQuery.setGroupByFields(objQuery.getFilterPart());
+		for(String i : objQuery.getGroupByFields()) {
+			System.out.println(i);
+		}
+		System.out.println();
+	}
+	
+	public void printAggregateFields(Query objQuery) {
+		
+		System.out.println("Aggregate Fields : ");
+		objQuery.setAggregateFields(objQuery.getBasePart());
+		for(String i : objQuery.getAggregateFields()) {
+			System.out.println(i);
+		}
+		System.out.println();
+	}
 
 	public static void main(String[] args) {
 		//System.in is input stream class.  System.out is an output stream class. sc is a pointer
@@ -89,56 +155,28 @@ public class Index {
 		//setting indexes of all three logical operators
 		query.setLogicalOpIndex();
 		
-		System.out.println("Conditions : ");
-		query.setConditions(query.getFilterPart());
+		//printing conditions
+		new Index().printConditions(query);
 		
-		for(ArrayList<String> i : query.getConditions()) {
-			for(String j : i)
-			{
-				System.out.print(j + " ");
-			}
-			System.out.println();
-		}
-		System.out.println();
+		//printing Logical Operators in sequence
+		new Index().printLogicalOperatorSeq(query);
 		
-		System.out.println("Logical Operators in seq : ");
-		query.setLogicalOpSeq(query.getFilterPart());
-		for(String i : query.getLogicalOpSeq()) {
-			System.out.println(i);
-		}
-		System.out.println();
+		//printing Select Fields
+		new Index().printSelectFields(query);
 		
-		System.out.println("Select Fields : ");
-		query.setSelectFields(query.getBasePart());
+		//printing Order By Fields
+		new Index().printOrderByFields(query);
 		
-		for(String i : query.getSelectFields()) {
-			System.out.println(i);
-		}
-		System.out.println();
+		//printing Group By Fields
+		new Index().printGroupByFields(query);
 		
-		System.out.println("Order By Fields : ");
-		query.setOrderByFields(query.getFilterPart());
-		for(String i : query.getOrderByFields()) {
-			System.out.println(i);
-		}
-		System.out.println();
-		
-		System.out.println("Group By Fields : ");
-		query.setGroupByFields(query.getFilterPart());
-		for(String i : query.getGroupByFields()) {
-			System.out.println(i);
-		}
-		System.out.println();
-		
-		System.out.println("Aggregate Fields : ");
-		query.setAggregateFields(query.getBasePart());
-		for(String i : query.getAggregateFields()) {
-			System.out.println(i);
-		}
-		System.out.println();
+		//printing Aggregate Fields
+		new Index().printAggregateFields(query);
 		        
-	    //object for performing methods on file
+	    //creating an object for performing methods on file
 	    FileRead fr = new FileRead();
+	    
+	    //
 	    fr.setRowList();
 	    fr.setHeading();
 	    fr.setRandomDataFirstRow();

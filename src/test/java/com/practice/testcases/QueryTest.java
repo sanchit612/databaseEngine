@@ -19,7 +19,7 @@ import org.junit.platform.runner.JUnitPlatform;
 
 
 @RunWith(JUnitPlatform.class)
-protected class QueryTest {
+public class QueryTest {
 	Query queryTest = null;
 	@BeforeAll
 	protected static void init() {
